@@ -1,0 +1,23 @@
+TAD Matrix
+} Tipo abstrato de dados para representar Matrizes de valores reais alocadas
+dinamicamente, com dimensões n por m fornecidas em tempo de execução.
+
+} Operações ---->>>>
+
+} matCreate
+} cria uma Matrix de dimensão m por n;
+
+} matDestroy
+} libera a memória alocada para a Matrix;
+
+} matGetElemIJ
+} acessa o elemento da linha i e da coluna j da Matrix;
+
+} matSetElemIJ
+} atribui o elemento da linha i e da coluna j da Matrix;
+
+} matGetNumLines
+} devolve o número de linhas da Matrix;
+
+} matGetNumCollumns
+} devolve o número de colunas da Matrix.
