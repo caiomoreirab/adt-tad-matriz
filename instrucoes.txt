@@ -2,6 +2,7 @@ TAD Matrix
 } Tipo abstrato de dados para representar Matrizes de valores reais alocadas
 dinamicamente, com dimensões n por m fornecidas em tempo de execução.
 
+
 } Operações ---->>>>
 
 } matCreate

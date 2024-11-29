@@ -9,33 +9,98 @@ typedef struct
     int colunas;
     float* v;
     
-} Matrix ;
+} Matrix;
 
 
-Matrix * matCreate (int n, int m){
+//} matCreate
+//} cria uma Matrix de dimensão m por n;
 
-    Matrix *mat; Matrix m; Matrix m; m.linhas; n.colunas;
+Matrix* matCreate (int n, int m){
 
-    if ( n > 0 && m > 0 ) {
-        mat = (Matrix*) malloc(sizeof(Matrix));
+    if (n <= 0 || m <= 0) {
+        return NULL;  // Verifica se os parâmetros são válidos
     }
 
+    Matrix* mat = (Matrix*) malloc(sizeof(Matrix));  // Aloca a estrutura da matriz
 
-            mat = (Matrix*) malloc(sizeof(Matrix));
-
-
-    if (mat != NULL) {
-        mat->linhas = n;
-        mat->colunas= m;
-        mat->v = (float *) malloc(sizeof(float) *n*m);
-    }
-    if ( mat->v != NULL ) {
-        return mat;
+    if (mat == NULL) {
+        return NULL;  // Verifica se a alocação da estrutura foi bem-sucedida
     }
 
-    free(mat);
-    
-    return NULL;
+    mat->linhas = n;
+    mat->colunas = m;
+
+    mat->v = (float*) malloc(sizeof(float) * n * m);  // Aloca o vetor de elementos
+    if (mat->v == NULL) {
+        free(mat);  // Libera a estrutura se a alocação do vetor falhar
+        return NULL;
+    }
+
+    return mat;  // Retorna a matriz criada com sucesso
 }
 
 
+
+//} matDestroy
+//} libera a memória alocada para a Matrix;
+
+int matDestroy (Matrix* mat){
+    if (mat != NULL ) {
+        free(mat->v);  //Desaloca inversamente a Alocação 
+        free(mat);
+        return 0;
+    }
+
+    return 1;
+}
+
+
+
+// matGetElemIJ
+//acessa o elemento da linha i e da coluna j da Matrix
+
+*Matrix matGetElemIJ(*Matrix mat, int j, int i) {
+   if (mat != NULL && (i >= 0 && j >=0) && (i < mat->linhas && j < mat->colunas)) {
+        int k = i *mat->coluna + j;
+        return mat->v[k];
+    }
+
+    return -1;
+}    
+ 
+
+// matSetElemIJ
+//} atribui o elemento da linha i e da coluna j da Matrix;
+
+int matSetElemIJ(*Matrix mat, int j, int i, float v) {
+   if (mat != NULL && (i >= 0 && j >=0) && (i < mat->linhas && j < mat->colunas)) {
+        int k = i *mat->coluna + j;
+        mat->v[k] = v;
+        return 0;
+    }
+
+    return 1;
+}    
+
+
+
+//} matGetNumLines
+//} devolve o número de linhas da Matrix;
+
+int matGetNumLines(*Matrix mat) {
+    if (mat != NULL) {
+        return mat->linhas;
+    }
+    return -1;
+}
+
+
+//} matGetNumCollumns
+//} devolve o número de colunas da Matrix.
+
+int matGetNumCollumns(*Matrix mat) {
+    if (mat != NULL) {
+        return mat->colunas;
+    }
+    return -1;
+}
