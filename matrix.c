@@ -1,8 +1,26 @@
+
+
+
+
+/*******************************************************
+* Arquivo: matrix.c (Implementação)
+* Descrição: Tipo abstrato de dados para representar Matrizes de valores reais alocadas
+dinamicamente, com dimensões n por m fornecidas em tempo de execução.
+* 
+* Autor: Caio Bandeira Moreira
+* Curso: Estrutura de Dados 1
+* Professor: Anselmo Cardoso de Paiva
+* Data: Novembro/2024
+*******************************************************/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "matrix.h"
 
+#define TRUE  1
+#define FALSE 0
 
 typedef struct
 {
@@ -13,8 +31,8 @@ typedef struct
 } Matrix;
 
 
-//} matCreate
-//} cria uma Matrix de dimensão m por n;
+// matCreate
+// cria uma Matrix de dimensão m por n;
 
 Matrix* matCreate (int n, int m){
 
@@ -40,24 +58,23 @@ Matrix* matCreate (int n, int m){
 }
 
 
-
-//} matDestroy
-//} libera a memória alocada para a Matrix;
+// matDestroy
+// libera a memória alocada para a Matrix;
 
 int matDestroy (Matrix* mat){
     if (mat != NULL ) {
         free(mat->v);  //Desaloca inversamente a Alocação 
         free(mat);
-        return 0;
+        return TRUE;
     }
 
-    return 1;
+    return FALSE;
 }
 
 
 
 // matGetElemIJ
-//acessa o elemento da linha i e da coluna j da Matrix
+// acessa o elemento da linha i e da coluna j da Matrix
 
 float matGetElemIJ(Matrix* mat, int j, int i) {
    if (mat != NULL && (i >= 0 && j >=0) && (i < mat->linhas && j < mat->colunas)) {
@@ -70,41 +87,37 @@ float matGetElemIJ(Matrix* mat, int j, int i) {
  
 
 // matSetElemIJ
-//} atribui o elemento da linha i e da coluna j da Matrix;
+// atribui o elemento da linha i e da coluna j da Matrix;
 
 int matSetElemIJ(Matrix* mat, int j, int i, float v) {
    if (mat != NULL && (i >= 0 && j >=0) && (i < mat->linhas && j < mat->colunas)) {
         int k = i * mat->colunas + j;
         mat->v[k] = v;
-        return 0;
+        return TRUE;
     }
 
-    return 1;
+    return FALSE;
 }    
 
 
-//} matGetNumLines
-//} devolve o número de linhas da Matrix;
+// matGetNumLines
+// devolve o número de linhas da Matrix;
 
 int matGetNumLines(Matrix* mat) {
     if (mat != NULL) {
         return mat->linhas;
     }
-    return -1;
+    return FALSE;
 }
 
 
-//} matGetNumCollumns
-//} devolve o número de colunas da Matrix.
+// matGetNumCollumns
+// devolve o número de colunas da Matrix.
 
 int matGetNumCollumns(Matrix* mat) {
     if (mat != NULL) {
         return mat->colunas;
     }
-    return -1;
+    return FALSE;
 }
 
-
-A estrutura matserve como um "contenedor" de informações sobre a matriz, como o número de linhas e colunas,
- além de fornecer um ponteiro vpara os dados reais da matriz.
-O ponteiro varmazena os valores da matriz em um vetor unidimensional.
