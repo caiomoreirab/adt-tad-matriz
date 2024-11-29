@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "matrix.h"
 
 
@@ -7,7 +8,7 @@ typedef struct
 {
     int linhas;
     int colunas;
-    float* v;
+    float* v;   //Vetor que irá ser alocado;
     
 } Matrix;
 
@@ -32,7 +33,6 @@ Matrix* matCreate (int n, int m){
 
     mat->v = (float*) malloc(sizeof(float) * n * m);  // Aloca o vetor de elementos
     if (mat->v == NULL) {
-        free(mat);  // Libera a estrutura se a alocação do vetor falhar
         return NULL;
     }
 
@@ -59,9 +59,9 @@ int matDestroy (Matrix* mat){
 // matGetElemIJ
 //acessa o elemento da linha i e da coluna j da Matrix
 
-*Matrix matGetElemIJ(*Matrix mat, int j, int i) {
+float matGetElemIJ(Matrix* mat, int j, int i) {
    if (mat != NULL && (i >= 0 && j >=0) && (i < mat->linhas && j < mat->colunas)) {
-        int k = i *mat->coluna + j;
+        int k = i *mat->colunas + j;
         return mat->v[k];
     }
 
@@ -72,9 +72,9 @@ int matDestroy (Matrix* mat){
 // matSetElemIJ
 //} atribui o elemento da linha i e da coluna j da Matrix;
 
-int matSetElemIJ(*Matrix mat, int j, int i, float v) {
+int matSetElemIJ(Matrix* mat, int j, int i, float v) {
    if (mat != NULL && (i >= 0 && j >=0) && (i < mat->linhas && j < mat->colunas)) {
-        int k = i *mat->coluna + j;
+        int k = i * mat->colunas + j;
         mat->v[k] = v;
         return 0;
     }
@@ -83,11 +83,10 @@ int matSetElemIJ(*Matrix mat, int j, int i, float v) {
 }    
 
 
-
 //} matGetNumLines
 //} devolve o número de linhas da Matrix;
 
-int matGetNumLines(*Matrix mat) {
+int matGetNumLines(Matrix* mat) {
     if (mat != NULL) {
         return mat->linhas;
     }
@@ -98,9 +97,14 @@ int matGetNumLines(*Matrix mat) {
 //} matGetNumCollumns
 //} devolve o número de colunas da Matrix.
 
-int matGetNumCollumns(*Matrix mat) {
+int matGetNumCollumns(Matrix* mat) {
     if (mat != NULL) {
         return mat->colunas;
     }
     return -1;
 }
+
+
+A estrutura matserve como um "contenedor" de informações sobre a matriz, como o número de linhas e colunas,
+ além de fornecer um ponteiro vpara os dados reais da matriz.
+O ponteiro varmazena os valores da matriz em um vetor unidimensional.
