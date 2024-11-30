@@ -20,7 +20,14 @@ dinamicamente, com dimensões n por m fornecidas em tempo de execução.
 #include <stdlib.h>
 
 // Declaração da estrutura Matrix
-typedef struct Matrix Matrix;
+typedef struct
+{
+    int linhas;
+    int colunas;
+    float* v;   //Vetor que irá ser alocado;
+    
+} Matrix;
+
 
 //cria uma Matrix de dimensão m por n;
 Matrix* matCreate (int n, int m);

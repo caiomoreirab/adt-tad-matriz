@@ -22,13 +22,6 @@ dinamicamente, com dimensões n por m fornecidas em tempo de execução.
 #define TRUE  1
 #define FALSE 0
 
-typedef struct
-{
-    int linhas;
-    int colunas;
-    float* v;   //Vetor que irá ser alocado;
-    
-} Matrix;
 
 
 // matCreate
