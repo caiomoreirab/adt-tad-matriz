@@ -22,7 +22,10 @@ dinamicamente, com dimensões n por m fornecidas em tempo de execução.
 #define TRUE  1
 #define FALSE 0
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0df30b7 (Atualizações Struct)
 
 // matCreate
 // cria uma Matrix de dimensão m por n;

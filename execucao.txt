@@ -1,3 +1,3 @@
 (VS code)
-Digitar via terminal: gcc main.c matrix.c -ADT-TAD-MATRIZ
+Digitar via terminal: gcc main.c matrix.c -o ADT-TAD-MATRIZ
 

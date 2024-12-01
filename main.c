@@ -1,35 +1,43 @@
 #include <stdio.h>
 #include "matrix.h"
+#include "matrix.c"
 
 int main() {
-    
-    // Cria uma matriz de 3x3
-    Matrix* mat = matCreate(3, 3);
+    // Criação de uma matriz 2x2
+    Matrix* mat = matCreate(2, 2);
     if (mat == NULL) {
-        printf("Erro ao criar a matriz!\n");
-        return 1;  // Retorna 1 em caso de erro
+        printf("Erro ao criar a matriz.\n");
+        return 1;  // Sai do programa em caso de erro
     }
 
-    // Preenche alguns valores na matriz
-    matSetElemIJ(mat, 0, 0, 1.1);  // mat[0][0] = 1.1
-    matSetElemIJ(mat, 1, 1, 2.2);  // mat[1][1] = 2.2
-    matSetElemIJ(mat, 2, 2, 3.3);  // mat[2][2] = 3.3
+    // Atribuir valores à matriz
+    if (!matSetElemIJ(mat, 0, 0, 1.0)) {
+        printf("Erro ao atribuir valor à posição [0][0].\n");
+    }
+    if (!matSetElemIJ(mat, 0, 1, 2.0)) {
+        printf("Erro ao atribuir valor à posição [0][1].\n");
+    }
+    if (!matSetElemIJ(mat, 1, 0, 3.0)) {
+        printf("Erro ao atribuir valor à posição [1][0].\n");
+    }
+    if (!matSetElemIJ(mat, 1, 1, 4.0)) {
+        printf("Erro ao atribuir valor à posição [1][1].\n");
+    }
 
-    // Acessa e imprime os valores da matriz
-    printf("mat[0][0] = %.2f\n", matGetElemIJ(mat, 0, 0));  // Esperado: 1.1
-    printf("mat[1][1] = %.2f\n", matGetElemIJ(mat, 1, 1));  // Esperado: 2.2
-    printf("mat[2][2] = %.2f\n", matGetElemIJ(mat, 2, 2));  // Esperado: 3.3
+    // Imprimir valores da matriz
+    printf("Valores da matriz 2x2:\n");
+    for (int i = 0; i < matGetNumLines(mat); i++) {
+        for (int j = 0; j < matGetNumCollumns(mat); j++) {
+            printf("mat[%d][%d] = %.2f\n", i, j, matGetElemIJ(mat, j, i));
+        }
+    }
 
-    // Imprime o número de linhas e colunas
-    printf("Número de linhas: %d\n", matGetNumLines(mat));  // Esperado: 3
-    printf("Número de colunas: %d\n", matGetNumCollumns(mat));  // Esperado: 3
-
-    // Destrói a matriz e libera a memória
+    // Liberar memória da matriz
     if (matDestroy(mat)) {
-        printf("Matriz destruída com sucesso!\n");
+        printf("Matriz destruída com sucesso.\n");
     } else {
-        printf("Erro ao destruir a matriz!\n");
+        printf("Erro ao destruir a matriz.\n");
     }
 
-    return 0;  // Retorna 0 para indicar sucesso
+    return 0;
 }
