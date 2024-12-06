@@ -69,5 +69,3 @@ Curso: Estrutura de Dados 1
 Professor: Anselmo Cardoso de Paiva
 Data: Novembro/2024
 ⚠️ Observação: Este projeto foi desenvolvido para fins acadêmicos e aprendizado. Sugestões e melhorias são bem-vindas!
-
-Pronto para ser usado no GitHub! Caso precise de instruções adicionais para configurar o repositório, é só pedir. 😊
